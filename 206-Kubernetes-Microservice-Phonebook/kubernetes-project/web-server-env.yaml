@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-server
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web-server
+  template:
+    metadata:
+      labels:
+        app: web-server
+    spec:
+      containers:
+      - name: myapp
+        image: abilalzengin/image-for-web:2.0
+        resources:
+        ports:
+        - containerPort: 80
+        env:
+          - name: MYSQL_DATABASE_HOST
+            value: "mysql"
+          - name: MYSQL_ROOT_PASSWORD
+            value: "123456"
+          - name: MYSQL_DATABASE
+            value: "phonebook"
+          - name: MYSQL_PASSWORD
+            value: "12345"
+          - name: MYSQL_USER
+            value: "admin"
